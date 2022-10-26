@@ -10,7 +10,8 @@ var mysql = require('mysql');
 
 const getUsuarios = async(req,res, next)=> {
     const params = req.params.texto;
-    const spawn = require('child_process').spawn
+    try {
+        const spawn = require('child_process').spawn
 
     const pythonProcess = spawn('python', ['./main.py'])
     let pythonResponse = ""
@@ -39,6 +40,14 @@ const getUsuarios = async(req,res, next)=> {
  
     });
    
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            error
+        });
+    }
+    
 };
 
 const createUsuarios =  async(req, res) =>{
