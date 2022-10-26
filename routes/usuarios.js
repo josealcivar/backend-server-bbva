@@ -13,7 +13,7 @@ const { validarJWT } = require('../midlewares/validar-jwt');
 
 const  router = Router();
 
-router.get('/',getUsuarios);
+router.get('/:texto',getUsuarios);
 
 router.post('/',
     [

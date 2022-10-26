@@ -9,12 +9,14 @@ const { dbConnection } = require('../database/config');
 var mysql = require('mysql');
 
 const getUsuarios = async(req,res, next)=> {
+    const params = req.params.texto;
     const spawn = require('child_process').spawn
 
-    const pythonProcess = spawn('python', ['../main.py'])
+    const pythonProcess = spawn('python', ['./main.py'])
     let pythonResponse = ""
     
     pythonProcess.stdout.on('data', function(data) {
+        
         pythonResponse += data.toString()
     })
     
@@ -22,7 +24,8 @@ const getUsuarios = async(req,res, next)=> {
         console.log(pythonResponse)
     })
     
-    pythonProcess.stdin.write('backendi')
+    // pythonProcess.stdin.write('backendi')
+    let datas=pythonProcess.stdin.write(params)
     
     pythonProcess.stdin.end()
 
@@ -31,7 +34,7 @@ const getUsuarios = async(req,res, next)=> {
         ok:true,
         //usuarios,
         result:"si pasó",
-        pythonResponse
+        datas
         
  
     });
