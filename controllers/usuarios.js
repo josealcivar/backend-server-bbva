@@ -31,6 +31,7 @@ const getUsuarios = async(req,res, next)=> {
         ok:true,
         //usuarios,
         result:"si pasó",
+        pythonResponse
         
  
     });
