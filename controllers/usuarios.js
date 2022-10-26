@@ -9,39 +9,22 @@ const { dbConnection } = require('../database/config');
 var mysql = require('mysql');
 
 const getUsuarios = async(req,res, next)=> {
-   
-    // var mysql = require('mysql');
-    // var connection = await mysql.createConnection({
-    //     host: 'database-bbva.c05cpwppzyke.us-east-1.rds.amazonaws.com',
-    //     user: 'adminbbva',
-    //     password: 'superadmin',
-    //     database: 'bbva_db',
-    //     port: 3306
-    //  });
-    // connection.connect(function(error){
-    //    if(error){
-    //       throw error;
-    //    }else{
-    //       console.log('Conexion correcta.');
-    //    }
-    // });
-    // var query =await  connection.query('select * from info_final;', function(error, result){
-    //    console.log(query);
-    //     if(error){
-    //       throw error;
-    //    }else{
-    //       console.log(result);
-    //       res.status(200).json({
-    //         ok:true,
-    //         //usuarios,
-    //         result,
-            
-     
-    //     })
-    //    }
-    //  }
-    // );
-    // connection.end();
+    const spawn = require('child_process').spawn
+
+    const pythonProcess = spawn('python', ['../main.py'])
+    let pythonResponse = ""
+    
+    pythonProcess.stdout.on('data', function(data) {
+        pythonResponse += data.toString()
+    })
+    
+    pythonProcess.stdout.on('end', function() {
+        console.log(pythonResponse)
+    })
+    
+    pythonProcess.stdin.write('backendi')
+    
+    pythonProcess.stdin.end()
 
     console.log("si ejecutó");
     res.status(200).json({
