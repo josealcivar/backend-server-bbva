@@ -21,7 +21,7 @@ app.use(express.json());
 
 // database
 
-dbConnection();
+//dbConnection();
 
 // rutas
 app.use('/api/usuarios', router);
