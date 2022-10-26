@@ -42,6 +42,8 @@ app.use('/api/upload', uploadsRoutes);
 //     });
 // });
 
-app.listen(process.env.PORT , () => {
-    console.log(`server on run: ${process.env.PORT}` || 3002);
+// app.listen(process.env.PORT , () => {
+    app.listen(3001,() =>{ 
+    // console.log(`server on run: ${process.env.PORT}` || 3002);
+    console.log('server on run', 3001);
 });
