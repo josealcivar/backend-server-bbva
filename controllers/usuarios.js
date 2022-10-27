@@ -14,7 +14,7 @@ const returnPython = (params)=>{
 
     
     return new Promise((resolve, reject)=> {
-        const spawn = require('child_process').exec
+        const spawn = require('child_process') //.exec
 
         const pythonProcess = spawn('python', ['./main.py'])
         let pythonResponse = "" 
