@@ -6,38 +6,60 @@ const  bcrypt  = require('bcrypt');
 const { generarJWT } = require('../helpers/jwt');
 const { dbConnection } = require('../database/config');
 
+// const {spawn} = require('child_process');
+
 var mysql = require('mysql');
+
+const returnPython = (params)=>{
+
+    
+    return new Promise((resolve, reject)=> {
+        const spawn = require('child_process').spawn
+
+        const pythonProcess = spawn('python', ['./main.py', params])
+        let pythonResponse = "" 
+        
+        pythonProcess.stdout.on('data', function(data) {
+            pythonResponse += data.toString();
+        })
+        
+        // pythonProcess.on('close', function() { 
+        //     console.log(pythonResponse)
+        //     resolve(pythonResponse)
+        // })
+        pythonProcess.stdin.write(params)
+        
+        pythonProcess.stdout.on('end', function() {
+            // console.log(pythonResponse)
+            resolve(pythonResponse)
+        })
+        
+        //let datas=pythonProcess.stdin.write(params)
+
+        // pythonProcess.stdin.write(params)
+
+        pythonProcess.stdin.end()
+
+        pythonProcess.on('error' , function(err){
+            reject(err)
+        });
+        //pythonProcess.stdin.end()
+    
+    });
+};
 
 const getUsuarios = async(req,res, next)=> {
     const params = req.params.texto;
     try {
-        const spawn = require('child_process').exec
-
-    const pythonProcess = spawn('python', ['./main.py'])
-    let pythonResponse = ""
-    
-    pythonProcess.stdout.on('data', function(data) {
-        
-        pythonResponse += data.toString()
-    })
-    
-    pythonProcess.stdout.on('end', function() {
-        console.log(pythonResponse)
-    })
-    
-    // pythonProcess.stdin.write('backendi')
-    let datas=pythonProcess.stdin.write(params)
-    
-    pythonProcess.stdin.end()
-
+    //    const estado = await returnPython(params);
     console.log("si ejecutó");
+    let resultado = await returnPython(params);
+
     res.status(200).json({
         ok:true,
         //usuarios,
         result:"si pasó",
-        datas
-        
- 
+        resultado
     });
    
     } catch (error) {
