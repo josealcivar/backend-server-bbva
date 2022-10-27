@@ -11,7 +11,7 @@ var mysql = require('mysql');
 const getUsuarios = async(req,res, next)=> {
     const params = req.params.texto;
     try {
-        const spawn = require('child_process').spawn
+        const spawn = require('child_process').exec
 
     const pythonProcess = spawn('python', ['./main.py'])
     let pythonResponse = ""
