@@ -14,7 +14,7 @@ const returnPython = (params)=>{
 
     
     return new Promise((resolve, reject)=> {
-        const spawn = require('child_process').spawn
+        const spawn = require('child_process').exec
 
         const pythonProcess = spawn('python', ['./main.py', params])
         let pythonResponse = "" 
@@ -28,7 +28,7 @@ const returnPython = (params)=>{
         //     resolve(pythonResponse)
         // })
         pythonProcess.stdin.write(params)
-        
+
         pythonProcess.stdout.on('end', function() {
             // console.log(pythonResponse)
             resolve(pythonResponse)
