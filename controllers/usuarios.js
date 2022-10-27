@@ -6,7 +6,7 @@ const  bcrypt  = require('bcrypt');
 const { generarJWT } = require('../helpers/jwt');
 const { dbConnection } = require('../database/config');
 
-// const {spawn} = require('child_process');
+const {spawn} = require('child_process');
 
 var mysql = require('mysql');
 
@@ -14,7 +14,7 @@ const returnPython = (params)=>{
 
     
     return new Promise((resolve, reject)=> {
-        const spawn = require('child_process').spawn
+        // const spawn = require('child_process').spawn
 
         const pythonProcess = spawn('python', ['./main.py'])
         let pythonResponse = "" 
