@@ -241,8 +241,8 @@ def ejecuta(modelo,ruta_imagenes,anios_local,zona,tipo_tienda):
   X = np.array(X)
 
   preds = modelo.predict([X, imagen])
-  #  ventas_max = 11282
+  #  ventas_max = 11282 
 
   return preds*11282
 
-ejecuta(modelo,"/Downloads/tienda 1/",2,"Norte","Tienda")
+print(ejecuta(modelo,"./Downloads/tienda 1/",2,"Norte","Tienda"))

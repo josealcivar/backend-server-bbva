@@ -6,7 +6,7 @@ const  bcrypt  = require('bcrypt');
 const { generarJWT } = require('../helpers/jwt');
 const { dbConnection } = require('../database/config');
 
-// const {spawn} = require('child_process');
+const {spawn} = require('child_process');
 
 var mysql = require('mysql');
 
@@ -14,11 +14,11 @@ const returnPython = (params)=>{
 
     
     return new Promise((resolve, reject)=> {
-        const spawn = require('child_process').spawn
+        // const spawn = require('child_process').spawn
 
         const pythonProcess = spawn('python', ['./modelo_mixto.py'])
         let pythonResponse = "" 
-        
+        // console.log(pythonProcess);
         pythonProcess.stdout.on('data', function(data) {
             pythonResponse += data.toString();
         })
@@ -27,7 +27,7 @@ const returnPython = (params)=>{
         //     console.log(pythonResponse)
         //     resolve(pythonResponse)
         // })
-        pythonProcess.stdin.write(params)
+        // pythonProcess.stdin.write(params)
 
         pythonProcess.stdout.on('end', function() {
             // console.log(pythonResponse)
@@ -52,9 +52,9 @@ const getUsuarios = async(req,res, next)=> {
     const params = req.params.texto;
     try {
     //    const estado = await returnPython(params);
-    console.log("si ejecutó");
+    // console.log("si ejecutó");
     let resultado = await returnPython(params);
-
+    console.log('resultado: ',resultado);
     res.status(200).json({
         ok:true,
         //usuarios,
