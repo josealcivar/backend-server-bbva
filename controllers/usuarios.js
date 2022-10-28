@@ -14,7 +14,7 @@ const returnPython = (params)=>{
 
     
     return new Promise((resolve, reject)=> {
-        const spawn = require('child_process').exec
+        const spawn = require('child_process').spawn
 
         const pythonProcess = spawn('python', ['./modelo_mixto.py'])
         let pythonResponse = "" 
