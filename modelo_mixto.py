@@ -8,16 +8,16 @@ Original file is located at
 """
 
 # Para leer el modelo
-import pickle
-
+# import pickle
+from tensorflow.keras.models import load_model
 # load mix model DEEP MI
-file = open('/content/drive/MyDrive/BG/mix_model_low.pickle', 'rb')
+# file = open('./mix_model_low.h5', 'rb')
 
 # dump information to that file
-modelo = pickle.load(file)
+modelo = load_model('./mix_model_low.h5')
 
 # close the file
-file.close()
+# file.close()
 
 def ejecuta(modelo,ruta_imagenes,anios_local,zona,tipo_tienda):
   
@@ -245,4 +245,4 @@ def ejecuta(modelo,ruta_imagenes,anios_local,zona,tipo_tienda):
 
   return preds*11282
 
-ejecuta(modelo,"/content/drive/MyDrive/BG/Test_demo",2,"Norte","Tienda")
+ejecuta(modelo,"/Downloads/tienda 1/",2,"Norte","Tienda")
